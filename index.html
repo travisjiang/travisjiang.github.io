@@ -7,7 +7,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -121,7 +121,7 @@
 
 
 
-  <title>Travis Blog</title>
+  <title>Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,7 +140,7 @@
     
   
 
-  <div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
   page-home">
     <div class="headband"></div>
 
@@ -309,117 +309,20 @@
 
       
         
-          
-            <h2 id="基本概念">基本概念</h2>
+          <h2 id="基本概念">基本概念</h2>
 <p>在数据挖掘中，K-Means算法是一种 cluster analysis 的<strong>软聚类</strong>算法，其主要是来计算数据聚集的算法，主要通过不断地取离种子点最近均值的算法。</p>
 <p>输入：样本集X，以及k值</p>
 <p>输出：对每一个输入，打一个标签y，标示属于某一类</p>
 <p>作用：无监督的，将输入X，分成k类</p>
 <p>kmeans算法的目标是：针对聚类所得簇划分<span class="math inline">\(C=\{C_1,C_2,...,C_k\}\)</span>，最小化均方误差 <span class="math display">\[E=\sum_{i=1}^k{\sum_{x \epsilon  C_i}{\left |\left | x- u_i \right |  \right | ^2}}\]</span></p>
 <p>其中<span class="math inline">\(u_i=\frac{1}{C_i}\sum_{x \epsilon C_i}{x}\)</span>是每个簇的聚类中心（簇的均值向量）。直观来看，改式在一定程度描述了簇内样本围绕聚类中心的紧密程度，E值越小说明簇内样本相似度越高</p>
-<p>要找到所有可能的划分，解决k-聚类问题，则</p>
-<ul>
-<li>每个样本点，有1~k种类别选择，复杂度是指数</li>
-<li>以&quot;每个类的intra-class variance最小化&quot;为评判标准，选择最优的结果</li>
-<li>即使k=2，这也是一个NP-hard问题</li>
-</ul>
-<p><strong>kmeans算法是一个启发式算法，采用贪心策略，通过迭代优化来近似求解上述问题</strong>。</p>
-<h2 id="细节部分">细节部分</h2>
-<p><strong>算法流程</strong></p>
-<ol style="list-style-type: decimal">
-<li>输入样本集X，聚类数k</li>
-<li>随机在X中选取k个样本作为中心点（种子点）</li>
-<li>对所有点，求其到k个点的距离。如Pi离种子点Si最近，则Pi属于Si点群（类）</li>
-<li>至此分成了k个点群（类），对每一个点群，计算新的中心点</li>
-<li>重复前两步，直到中心点位置不再变动 or 达到指定的迭代次数</li>
-</ol>
-<p><strong>代码实现</strong></p>
-<p>https://github.com/eriklindernoren/ML-From-Scratch/blob/master/mlfromscratch/unsupervised_learning/k_means.py</p>
-<p><strong>复杂度</strong></p>
-<ol style="list-style-type: decimal">
-<li>假设样本点数为n，features数为m，迭代次数i</li>
-<li>计算点距离O(m)——计算某个点属于哪个簇O(mk)——计算所有点属于哪个簇O(nmk)</li>
-<li>（求平均方法）计算某簇中心点O(n/k)——计算所有点簇中心点O(n)</li>
-<li>迭代i次：i*(O(nmk+O(n)) = O(nmki)</li>
-</ol>
-<p>kmeans算法是一个启发式算法，复杂度是线性的，找的只是近似解，不是精确解。而且可能是不收敛的（无解的）。</p>
-<h2 id="问题缺陷">问题缺陷</h2>
-<p>K-means算法的主要缺陷在于初值种子点的选择：</p>
-<ul>
-<li>受初始种子点影响大。不同的随机种子点会得到完全不同的结果——<strong>kmeans++</strong>改进。</li>
-<li>K要事先给定。但实际上往往并不能事先知道分成多少类合适，所以K的选定是很难以估计的——<strong>ISODATA</strong>改进。</li>
-</ul>
-<h2 id="改进算法kmeans">改进算法——Kmeans++</h2>
-<p>K-means++算法在2007被David Arthur提出，用于优化选取k-means算法初值。</p>
-<p><strong>基本思想</strong></p>
-<p>先随机确定一个中心点，在逐个选取出其他中心点，选取的原则是，让聚类中心尽量相互远离。</p>
-<p><strong>算法流程</strong></p>
-<ol style="list-style-type: decimal">
-<li>确定输入样本集X，聚类数k</li>
-<li>随机选取一个样本点作为初始聚类中心</li>
-<li>选择新的聚类中心，如何选？
-<ul>
-<li>计算所有样本点与当前已有聚类中心的最短距离Di（如计算点A与所有聚类中心距离，保存距离最小的那个）</li>
-<li>对每个点i，以<span class="math inline">\(\frac{D_i^2}{\sum_i^N{D_i^2}}\)</span>为概率，选取其作为下一个聚类中心。可以用轮盘法，这样距离当前聚类中心越远的点就有更大的概率被选做新的聚类中心</li>
-</ul></li>
-<li>重复2,3步，直到选择出k个聚类中心</li>
-<li>选出聚类中心后，计算步骤与kmeans相同</li>
-</ol>
-<h2 id="改进算法isodata">改进算法——ISODATA</h2>
-<p>ISODATA全称为迭代自组织数据分析法。针对kmeans算法中k值难以提前给定，进行了改进。 <strong>基本思想</strong></p>
-<p>当属于某个类别的样本数过少，则去除该类别；当属于某个类别的样本数过多、分散程度过大则将其分裂为两个类别。</p>
-<p><strong>算法流程</strong></p>
-<ol style="list-style-type: decimal">
-<li>确定输入参数
-<ul>
-<li>预期的聚类中心数目K0：虽然聚类中心数可变，但还是要有个参考标准进行</li>
-<li>每个类所要求的最少样本数目Nmin：作为<strong>分裂</strong>操作和<strong>合并</strong>操作的判别条件</li>
-<li>最大方差Sigma：用于衡量某个类别中的样本分散程度，作为<strong>分裂</strong>操作的判别条件，方差太大的类要分裂</li>
-<li>两个聚类中心间的最小距离：作为<strong>合并</strong>的判别条件，距离太近的两个类要合并</li>
-</ul></li>
-<li>随机选取K0个样本作为初始聚类中心</li>
-<li>计算每个样本到各聚类中心的距离，将其分到距离最小的类别中</li>
-<li>判断每个类中元素是否小于Nmin。若是，则丢弃该类，另K=K-1，并将该类中的样本按照step 3重分类</li>
-<li>针对每个聚类，重新计算聚类中心的位置</li>
-<li>如果当前总类别数<span class="math inline">\(K&lt;=\frac{K0}{2}\)</span>，说明类别太少，进行分裂操作</li>
-<li>如果当前总类别数<span class="math inline">\(K&gt;=2*K0\)</span>，说明类别太多，进行合并操作</li>
-<li>当达到最大迭代次数则终止，否则返回step3继续执行</li>
-</ol>
-<p><strong>整个算法中，迭代操作包括3<sub>7，其中3</sub>5与普通kmeans相同，只是在之后增加了合并操作7与分裂操作6而已</strong></p>
-<div class="figure">
-<img src="/2017/11/19/kmeans/merge.png" alt="merge">
-<p class="caption">merge</p>
-</div>
-<div class="figure">
-<img src="/2017/11/19/kmeans/split.png" alt="split">
-<p class="caption">split</p>
-</div>
-<h2 id="改进算法kernel-kmeans">改进算法——kernel kmeans</h2>
-<p>传统kmeans算法采用欧式距离进行样本空间相似度度量，但对于海量、高维的数据集，这种方式并不一定使用。参照<strong>svm中核函数</strong>的思想，将样本映射到另一个特征空间再进行聚类，有可能改善聚类效果。</p>
-<p>经典的k-means采取二次欧氏距离作为相似性的度量，并且假设分类时的聚类误差是服从正态分布的，因此k-means在处理非标准正态分布和非均匀样本集合时聚类效果较差。</p>
-<p>对于非标准正态分布和非均匀分布的样本，k-means聚类效果不好，其主要原因是k-means是假设相似度可以用二次欧式距离等价的衡量，但是在实际的样本集合中这个假设不一定实用。</p>
-<p>其实关键区别就在于，距离的计算使用核函数（高位空间中样本点的内积）来实现： <span class="math display">\[k(x_i, x_j) = \phi (x_i)^T \phi (x_j)\]</span></p>
-<h2 id="改进算法二分kmeans聚类">改进算法——二分kmeans聚类</h2>
-<p>按照k-means聚类规则，很容易陷入局部最小值。二分kmeans聚类就是为解决这一问题</p>
-<p><strong>基本思想</strong></p>
-<p>首先把所有样本看成一个簇，而后二分这个簇，接着选择其中一个簇继续进行二分，直到选出了K个簇。至于选取哪个簇继续二分，其选取的原则是二分这个簇后会使总的误差平方和最小。这里的误差平方和可以理解为各样本到聚类中心点的距离和。</p>
-<p><strong>其他的kmeans算法改进还很多，根据具体需要去查询paper</strong></p>
-<h2 id="实际应用">实际应用</h2>
-<ul>
-<li>推荐系统：离线进行聚类，从而在进行协同过滤时仅仅搜索同一个类中的数据，大大降低计算量提升效率</li>
-<li>市场分类、图像分割、特征学习等</li>
-</ul>
-<h2 id="参考链接">参考链接</h2>
-<ul>
-<li><strong>kmeans wiki</strong>：https://en.wikipedia.org/wiki/K-means_clustering</li>
-<li>kmeans++ wiki：https://en.wikipedia.org/wiki/K-means%2B%2B#cite_note-5</li>
-<li>推荐的中文教程：http://www.csdn.net/article/2012-07-03/2807073-k-means</li>
-<li>聚类方法tutorial以及demo：http://home.deib.polimi.it/matteucc/Clustering/tutorial_html/AppletKM.html</li>
-<li>中文blog：http://blog.csdn.net/autocyz/article/details/46754167</li>
-<li>《机器学习》周志华，西瓜书</li>
-</ul>
-
-          
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/19/kmeans/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -537,22 +440,15 @@
       
         
           
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="quick-start">Quick Start</h2>
-<h3 id="create-a-new-post">Create a new post</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="run-server">Run server</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="generate-static-files">Generate static files</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="deploy-to-remote-sites">Deploy to remote sites</h3>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-
-          
+          Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in 
+          ...
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2017/11/19/hello-world/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -858,7 +754,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 

@@ -7,7 +7,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-Hans">
 <head>
-  <meta charset="UTF-8"/>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <meta name="theme-color" content="#222">
@@ -89,7 +89,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2017/11/19/kmeans/merge.png">
 <meta property="og:image" content="http://yoursite.com/2017/11/19/kmeans/split.png">
-<meta property="og:updated_time" content="2017-11-19T13:54:06.799Z">
+<meta property="og:updated_time" content="2017-11-19T14:56:25.695Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习算法——kmeans">
 <meta name="twitter:description" content="基本概念 在数据挖掘中，K-Means算法是一种 cluster analysis 的软聚类算法，其主要是来计算数据聚集的算法，主要通过不断地取离种子点最近均值的算法。 输入：样本集X，以及k值 输出：对每一个输入，打一个标签y，标示属于某一类 作用：无监督的，将输入X，分成k类 kmeans算法的目标是：针对聚类所得簇划分\(C=\{C_1,C_2,...,C_k\}\)，最小化均方误差 \[E">
@@ -129,7 +129,7 @@
 
 
 
-  <title>机器学习算法——kmeans | Travis Blog</title>
+  <title>机器学习算法——kmeans | Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -148,7 +148,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -320,6 +320,7 @@
 <p>作用：无监督的，将输入X，分成k类</p>
 <p>kmeans算法的目标是：针对聚类所得簇划分<span class="math inline">\(C=\{C_1,C_2,...,C_k\}\)</span>，最小化均方误差 <span class="math display">\[E=\sum_{i=1}^k{\sum_{x \epsilon  C_i}{\left |\left | x- u_i \right |  \right | ^2}}\]</span></p>
 <p>其中<span class="math inline">\(u_i=\frac{1}{C_i}\sum_{x \epsilon C_i}{x}\)</span>是每个簇的聚类中心（簇的均值向量）。直观来看，改式在一定程度描述了簇内样本围绕聚类中心的紧密程度，E值越小说明簇内样本相似度越高</p>
+<a id="more"></a>
 <p>要找到所有可能的划分，解决k-聚类问题，则</p>
 <ul>
 <li>每个样本点，有1~k种类别选择，复杂度是指数</li>
@@ -761,6 +762,26 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
