@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="machine-learning," />
 
 
 
@@ -79,13 +79,20 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Travis Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="基本概念 决策树是常见的机器学习算法，具有及其良好的可解释性，如同人的思维一样，比如决定今天时否出门，如果下雨，那么再看风大不大，如果又刮大风，那么就不出门：">
+<meta name="keywords" content="machine-learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习算法——决策树(DecisionTree)">
+<meta property="og:url" content="http://yoursite.com/2017/11/23/decision-tree/index.html">
 <meta property="og:site_name" content="Travis Blog">
+<meta property="og:description" content="基本概念 决策树是常见的机器学习算法，具有及其良好的可解释性，如同人的思维一样，比如决定今天时否出门，如果下雨，那么再看风大不大，如果又刮大风，那么就不出门：">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/11/23/decision-tree/demo.png">
+<meta property="og:updated_time" content="2017-11-23T14:04:55.488Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Travis Blog">
+<meta name="twitter:title" content="机器学习算法——决策树(DecisionTree)">
+<meta name="twitter:description" content="基本概念 决策树是常见的机器学习算法，具有及其良好的可解释性，如同人的思维一样，比如决定今天时否出门，如果下雨，那么再看风大不大，如果又刮大风，那么就不出门：">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/23/decision-tree/demo.png">
 
 
 
@@ -115,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/23/decision-tree/"/>
 
 
 
 
 
-  <title>Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>机器学习算法——决策树(DecisionTree) | Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,8 +147,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +240,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +272,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/decision-tree/" itemprop="url">机器学习算法——决策树(DecisionTree)</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习算法——决策树(DecisionTree)</h1>
         
 
         <div class="post-meta">
@@ -340,17 +344,92 @@
       
 
       
-        
-          <h2 id="基本概念">基本概念</h2>
+        <h2 id="基本概念">基本概念</h2>
 <p>决策树是常见的机器学习算法，具有及其良好的可解释性，如同人的思维一样，比如决定今天时否出门，如果下雨，那么再看风大不大，如果又刮大风，那么就不出门：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/23/decision-tree/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<div class="figure">
+<img src="/2017/11/23/decision-tree/demo.png" alt="demo">
+<p class="caption">demo</p>
+</div>
+<p>决策树按照预测值y的类型，可以分为</p>
+<ul>
+<li>分类树：预测值y代表类别，是离散值</li>
+<li>回归树：预测值y代表数值，如身高，为连续值</li>
+</ul>
+<p>决策树按照实现方法的不同，又分为CART、ID3、C4.5</p>
+<h2 id="算法原理">算法原理</h2>
+<p><strong>决策树的构造过程，主要包含三步</strong>：</p>
+<ul>
+<li>如何选择节点属性</li>
+<li>如何分裂属性</li>
+<li>达的终止条件，终止决策树构造</li>
+</ul>
+<p><strong>选择属性</strong>方法有很多，不同的决策树主要区别就在于属性选择的方法，Quora上针对此也有详细的回答：<a href="https://www.quora.com/What-are-the-differences-between-ID3-C4-5-and-CART" target="_blank" rel="noopener">what-are-the-differences-between-ID3-C4-5-and-CART</a></p>
+<ul>
+<li>ID3——信息增益
+<ul>
+<li>缺点：偏向于多值特征</li>
+</ul></li>
+<li>C4.5——信息增益率</li>
+<li>CART——Gini Impurity（分类）and Variance reduction（回归），具体可参见wiki</li>
+</ul>
+<div class="figure">
+<embed src="compare.webp">
+<p class="caption">compare</p>
+</div>
+<p><strong>分裂属性</strong>的方法相对固定，主要有三种不同情况：</p>
+<ol style="list-style-type: decimal">
+<li>属性是离散值且不要求生成二叉决策树。此时用属性的每一个划分作为一个分支。</li>
+<li>属性是离散值且要求生成二叉决策树。此时使用属性划分的一个子集进行测试，按照“属于此子集”和“不属于此子集”分成两个分支。</li>
+<li>属性是连续值。此时确定一个值作为分裂点split_point，按照&gt;split_point和&lt;=split_point生成两个分支。</li>
+</ol>
+<p><strong>决策树构造的终止条件</strong>是什么？在两种情况下我们停止进一步对子集进行划分，其一是划分已经达的可以理想效果了，另外一种就是进一步划分收效甚微，不值得再继续了。用专业术语总结终止条件有以下几个：</p>
+<ul>
+<li>子集的熵达的阈值</li>
+<li>子集规模够小</li>
+<li>进一步划分的增益小于阈值</li>
+</ul>
+<h2 id="优缺点总结">优缺点总结</h2>
+<p>wiki：https://en.wikipedia.org/wiki/Decision_tree_learning</p>
+<ul>
+<li>优点——预测复杂度为树深度</li>
+<li>优点——可读性描述性好</li>
+<li>缺点——学习时的计算量和内存消耗随着样本规模变大</li>
+<li>缺点——连续数据难处理</li>
+<li>缺点——多分类问题，准确率不够理想</li>
+</ul>
+<h2 id="实际使用trick">实际使用trick</h2>
+<ol style="list-style-type: decimal">
+<li><p>属性为连续变量时，如何使用互信息选择</p>
+<ul>
+<li>方法A：假设属性符合某概率分布，通过概率密度函数计算</li>
+<li>方法B：先将D中元素按照特征属性排序，则每两个相邻元素的中间点可以看做潜在分裂点，从第一个潜在分裂点开始，分裂D并计算两个集合的期望信息，具有最小期望信息的点称为这个属性的最佳分裂点，其信息期望作为此属性的信息期望。</li>
+</ul></li>
+<li>属性用完，但仍有子集不是纯净集
+<ul>
+<li>多数票决：以子集中的多数类别作为该叶子节点类别</li>
+</ul></li>
+<li><p>树深度不要过深：避免数据中的噪声和离群点导致的过拟合</p>
+<ul>
+<li>前剪枝：在构造过程中，当某个节点满足剪枝条件，则直接停止此分支的构造</li>
+<li>后剪枝：先构造完成完整的决策树，再通过某些条件遍历树进行剪枝</li>
+</ul></li>
+<li><p>剪枝策略</p>
+<ul>
+<li>Pessimistic Error Pruning：悲观错误剪枝</li>
+<li>Minimum Error Pruning：最小误差剪枝</li>
+<li>Cost-Complexity Pruning：代价复杂剪枝</li>
+<li>Error-Based Pruning：基于错误的剪枝，即对每一个节点，都用一组测试 数据集进行测试，如果分裂之后，能够降低错误率，再继续分裂为两棵子树，否则直接作为叶子节点。</li>
+<li>Critical Value Pruning：关键值剪枝，就是设置信息Gain的阈值作为停止条件</li>
+</ul></li>
+</ol>
+<h2 id="reference">Reference</h2>
+<ul>
+<li>wiki：<a href="https://en.wikipedia.org/wiki/Decision_tree" class="uri" target="_blank" rel="noopener">https://en.wikipedia.org/wiki/Decision_tree</a></li>
+<li>wiki（learning）：https://en.wikipedia.org/wiki/Decision_tree_learning</li>
+<li>github src：https://github.com/eriklindernoren/ML-From-Scratch</li>
+</ul>
+
       
     </div>
     
@@ -365,166 +444,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/kmeans/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Travis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Travis Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/kmeans/" itemprop="url">机器学习算法——kmeans</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T04:22:05+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/machine-learning/" rel="tag"># machine-learning</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h2 id="基本概念">基本概念</h2>
-<p>在数据挖掘中，K-Means算法是一种 cluster analysis 的<strong>软聚类</strong>算法，其主要是来计算数据聚集的算法，主要通过不断地取离种子点最近均值的算法。</p>
-<p>输入：样本集X，以及k值</p>
-<p>输出：对每一个输入，打一个标签y，标示属于某一类</p>
-<p>作用：无监督的，将输入X，分成k类</p>
-<p>kmeans算法的目标是：针对聚类所得簇划分<span class="math inline">\(C=\{C_1,C_2,...,C_k\}\)</span>，最小化均方误差 <span class="math display">\[E=\sum_{i=1}^k{\sum_{x \epsilon  C_i}{\left |\left | x- u_i \right |  \right | ^2}}\]</span></p>
-<p>其中<span class="math inline">\(u_i=\frac{1}{C_i}\sum_{x \epsilon C_i}{x}\)</span>是每个簇的聚类中心（簇的均值向量）。直观来看，改式在一定程度描述了簇内样本围绕聚类中心的紧密程度，E值越小说明簇内样本相似度越高</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/19/kmeans/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/19/kmeans/" rel="next" title="机器学习算法——kmeans">
+                <i class="fa fa-chevron-left"></i> 机器学习算法——kmeans
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -534,10 +483,11 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -545,6 +495,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -565,8 +517,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -628,6 +589,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#算法原理"><span class="nav-number">2.</span> <span class="nav-text">算法原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优缺点总结"><span class="nav-number">3.</span> <span class="nav-text">优缺点总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实际使用trick"><span class="nav-number">4.</span> <span class="nav-text">实际使用trick</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">5.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -747,6 +724,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
