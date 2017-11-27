@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="machine-learning," />
 
 
 
@@ -79,13 +79,22 @@
 
 
 
-<meta property="og:type" content="website">
-<meta property="og:title" content="Travis Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="基本概念 机器学习中常见如下中英文概念，极易混淆：  正则化、正规化、标准化、规范化、归一化 Normalization、Standardization、Regularization  对上述概念可以理解为：  Normalization or Standardization（正规化、标准化、规范化、归一化）是一种数据">
+<meta name="keywords" content="machine-learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习——正则化、正规化、规范化、标准化、归一化">
+<meta property="og:url" content="http://yoursite.com/2017/11/27/normalization/index.html">
 <meta property="og:site_name" content="Travis Blog">
+<meta property="og:description" content="基本概念 机器学习中常见如下中英文概念，极易混淆：  正则化、正规化、标准化、规范化、归一化 Normalization、Standardization、Regularization  对上述概念可以理解为：  Normalization or Standardization（正规化、标准化、规范化、归一化）是一种数据转化的方式，将数据变化为适合于处理的形式，通常目标目标是对数据进行缩放和和中心化">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2017/11/27/normalization/normal1.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/27/normalization/normal2.jpg">
+<meta property="og:image" content="http://yoursite.com/2017/11/27/normalization/regular.jpg">
+<meta property="og:updated_time" content="2017-11-27T14:33:17.423Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Travis Blog">
+<meta name="twitter:title" content="机器学习——正则化、正规化、规范化、标准化、归一化">
+<meta name="twitter:description" content="基本概念 机器学习中常见如下中英文概念，极易混淆：  正则化、正规化、标准化、规范化、归一化 Normalization、Standardization、Regularization  对上述概念可以理解为：  Normalization or Standardization（正规化、标准化、规范化、归一化）是一种数据转化的方式，将数据变化为适合于处理的形式，通常目标目标是对数据进行缩放和和中心化">
+<meta name="twitter:image" content="http://yoursite.com/2017/11/27/normalization/normal1.jpg">
 
 
 
@@ -115,13 +124,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/11/27/normalization/"/>
 
 
 
 
 
-  <title>Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>机器学习——正则化、正规化、规范化、标准化、归一化 | Travis Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -140,8 +149,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,9 +242,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -266,9 +274,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/27/normalization/" itemprop="url">机器学习——正则化、正规化、规范化、标准化、归一化</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习——正则化、正规化、规范化、标准化、归一化</h1>
         
 
         <div class="post-meta">
@@ -340,8 +346,7 @@
       
 
       
-        
-          <h2 id="基本概念">基本概念</h2>
+        <h2 id="基本概念">基本概念</h2>
 <p>机器学习中常见如下中英文概念，极易混淆：</p>
 <ul>
 <li>正则化、正规化、标准化、规范化、归一化</li>
@@ -352,14 +357,80 @@
 <li><strong>Normalization or Standardization（正规化、标准化、规范化、归一化）</strong>是一种数据转化的方式，将数据变化为适合于处理的形式，通常目标目标是对数据进行缩放和和中心化等操作</li>
 <li><strong>Regularization（正则化）</strong>是求解最优化问题中，用于改善过拟合的手段，常见方式是为Loss函数增加惩罚项</li>
 </ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/27/normalization/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+<h2 id="normalization-or-standardization">Normalization or Standardization</h2>
+<p>将正规化、规范化、标准化、归一化可以理解为一类任务，就是对数据进行变换，进一步细分的话</p>
+<ul>
+<li>正规化和规范化，是对数据变化的一种统称方式，包含了归一化和标准化。</li>
+<li>归一化和标准化，不同评价指标往往具有不同的量纲和单位，为了消除量纲影响，使数据具有可比性。两者可以认为是一回事，也可以认为一些微小区别。</li>
+</ul>
+<h3 id="归一化">归一化</h3>
+<ul>
+<li>目标：将值映射到[0-1]之间</li>
+<li>方式：比较多，min-max使用较多
+<ul>
+<li><span class="math inline">\(x&#39; = \frac{x-min}{max-min}\)</span></li>
+<li><span class="math inline">\(x&#39; = \frac{1}{1+e^{-x}}\)</span> or softmax</li>
+<li><span class="math inline">\(x&#39; = \log x\)</span></li>
+</ul></li>
+<li>好处：最优化问题中，加速梯度迭代收敛速度、提升求解精度</li>
+</ul>
+<div class="figure">
+<img src="/2017/11/27/normalization/normal1.jpg" alt="normal1">
+<p class="caption">normal1</p>
+</div>
+<h3 id="标准化">标准化</h3>
+<ul>
+<li>目标：去中心化，将数据按比例缩放，落入到一个特定的小区间</li>
+<li>方式：常见zscore和bn
+<ul>
+<li>zscore(均值为0，方差为1)：<span class="math inline">\(x&#39; = \frac{x-mean}{std}\)</span></li>
+<li>batch normalization</li>
+</ul></li>
+<li>好处：均值为0方差为1有很多优势，如计算距离时使数据重要程度相同等</li>
+</ul>
+<div class="figure">
+<img src="/2017/11/27/normalization/normal2.jpg" alt="normal2">
+<p class="caption">normal2</p>
+</div>
+<p>上图是一个散点序列的标准化过程：原图——》去中心化——》除以标准差</p>
+<h3 id="如何选择做归一化还是标准化">如何选择做归一化还是标准化？</h3>
+<p>在涉及到计算点与点之间的距离时，使用归一化或标准化都会对最后的结果有所提升，甚至会有质的区别。那在归一化与标准化之间应该如何选择呢？如果把所有维度的变量一视同仁，在最后计算距离中发挥相同的作用应该选择标准化，如果想保留原始数据中由标准差所反映的潜在权重关系应该选择归一化。另外，标准化更适合现代嘈杂大数据场景。</p>
+<h2 id="regularization">Regularization</h2>
+<p>正则化主要用于避免过拟合的产生和减少网络误差。</p>
+<p>正则化一般具有如下形式：</p>
+<p><span class="math display">\[J(w, b) = \frac{1}{m}\sum^m_{i=1}{L(f(x),y) + \lambda R(f)}\]</span></p>
+<p>其中，第一项是经验风险项，<strong>第二项就是加入的正则项</strong>。常见的正则项有L1正则和L2正则，对应到范数</p>
+<ul>
+<li><span class="math inline">\(L_0\)</span>范数：<span class="math inline">\(||w||_0 = len(x!=0)\)</span> （非0元素个数）</li>
+<li><span class="math inline">\(L_1\)</span>范数：<span class="math inline">\(||w||_1 = \sum^d_{i=1}{|x_i|}\)</span> （绝对值之和）</li>
+<li><span class="math inline">\(L_2\)</span>范数：<span class="math inline">\(||w||_2 = (\sum^d_{i=1}{x^2_i})^{1/2}\)</span> （欧式距离）</li>
+<li><span class="math inline">\(L_p\)</span>范数：<span class="math inline">\(||w||_p = (\sum^d_{i=1}{x^p_i})^{1/p}\)</span></li>
+</ul>
+<p>在机器学习中，若使用了<span class="math inline">\(||w||_p\)</span>作为正则项，我们则说该<strong>机器学习任务引入了 <span class="math inline">\(L_{p}\)</span> 正则项</strong>。</p>
+<p>L1与L2正则的各自的效果如何？</p>
+<ul>
+<li>L1正则，也叫Lasso regularizer。倾向于得到稀疏解，参数w中只有极少元素非0，有一定的特征选择的效果</li>
+<li>L2正则，也叫Ridge Regularizer/ Weight Decay。倾向于使参数w的大小相对均匀，控制过拟合的效果会比L1稍好。</li>
+</ul>
+<p>如何解释上述结论呢？</p>
+<ul>
+<li>学习的目标是最小化<span class="math inline">\(J(w,b)\)</span>，函数由两项组成——经验项和正则项。</li>
+<li>假设参数是二维点，则划出上述两项的等值线如下图，当总体取到极小值点时，一定是处于两者等值线的交点。</li>
+<li>L1正则项等值线与平方误差经验项的交点较大概率在坐标轴，L2正则项的等值线产生的交点更容易处于非坐标抽区域</li>
+<li>显然坐标轴上的点，导致其他维度参数为0。而非坐标轴点，则各维度参数较为均匀。</li>
+</ul>
+<div class="figure">
+<img src="/2017/11/27/normalization/regular.jpg" alt="regular">
+<p class="caption">regular</p>
+</div>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/29957294?utm_medium=social&amp;utm_source=weibo" target="_blank" rel="noopener">ML入门：归一化、标准化、正则化</a></li>
+<li><a href="https://www.zhihu.com/question/38102762" target="_blank" rel="noopener">深度学习中Batch Normalization为什么效果好？</a></li>
+<li>《机器学习》周志华</li>
+</ul>
+
       
     </div>
     
@@ -374,308 +445,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/gbdt/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Travis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Travis Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/gbdt/" itemprop="url">机器学习算法——GBDT</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T23:07:56+08:00">
-                2017-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/machine-learning/" rel="tag"># machine-learning</a>
           
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <h2 id="基本概念">基本概念</h2>
-<p>GBDT(Gradient Boosting Decision Tree) 又叫 MART（Multiple Additive Regression Tree)，是一种迭代的决策树算法，该算法由多棵决策树组成，所有树的结论累加起来做最终答案。它在被提出之初就和SVM一起被认为是泛化能力较强的算法。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/23/gbdt/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/23/gbdt/" rel="next" title="机器学习算法——GBDT">
+                <i class="fa fa-chevron-left"></i> 机器学习算法——GBDT
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/23/decision-tree/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Travis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Travis Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/11/23/decision-tree/" itemprop="url">机器学习算法——决策树(DecisionTree)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
+          <div class="post-nav-prev post-nav-item">
             
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-23T04:52:51+08:00">
-                2017-11-23
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <h2 id="基本概念">基本概念</h2>
-<p>决策树是常见的机器学习算法，具有及其良好的可解释性，如同人的思维一样，比如决定今天时否出门，如果下雨，那么再看风大不大，如果又刮大风，那么就不出门：</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/11/23/decision-tree/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -685,162 +484,11 @@
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/19/kmeans/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Travis">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Travis Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2017/10/19/kmeans/" itemprop="url">机器学习算法——kmeans</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-19T04:22:05+08:00">
-                2017-10-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/study/" itemprop="url" rel="index">
-                    <span itemprop="name">study</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h2 id="基本概念">基本概念</h2>
-<p>在数据挖掘中，K-Means算法是一种 cluster analysis 的<strong>软聚类</strong>算法，其主要是来计算数据聚集的算法，主要通过不断地取离种子点最近均值的算法。</p>
-<p>输入：样本集X，以及k值</p>
-<p>输出：对每一个输入，打一个标签y，标示属于某一类</p>
-<p>作用：无监督的，将输入X，分成k类</p>
-<p>kmeans算法的目标是：针对聚类所得簇划分<span class="math inline">\(C=\{C_1,C_2,...,C_k\}\)</span>，最小化均方误差 <span class="math display">\[E=\sum_{i=1}^k{\sum_{x \epsilon  C_i}{\left |\left | x- u_i \right |  \right | ^2}}\]</span></p>
-<p>其中<span class="math inline">\(u_i=\frac{1}{C_i}\sum_{x \epsilon C_i}{x}\)</span>是每个簇的聚类中心（簇的均值向量）。直观来看，改式在一定程度描述了簇内样本围绕聚类中心的紧密程度，E值越小说明簇内样本相似度越高</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2017/10/19/kmeans/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+    <div class="post-spread">
       
     </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
   </div>
-  
-  
-  
-  </article>
-
-
-    
-  </section>
-
-  
 
 
           </div>
@@ -848,6 +496,8 @@
 
 
           
+  
+
 
         </div>
         
@@ -868,8 +518,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -931,6 +590,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#基本概念"><span class="nav-number">1.</span> <span class="nav-text">基本概念</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#normalization-or-standardization"><span class="nav-number">2.</span> <span class="nav-text">Normalization or Standardization</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#归一化"><span class="nav-number">2.1.</span> <span class="nav-text">归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#标准化"><span class="nav-number">2.2.</span> <span class="nav-text">标准化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何选择做归一化还是标准化"><span class="nav-number">2.3.</span> <span class="nav-text">如何选择做归一化还是标准化？</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#regularization"><span class="nav-number">3.</span> <span class="nav-text">Regularization</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#reference"><span class="nav-number">4.</span> <span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -1050,6 +725,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
